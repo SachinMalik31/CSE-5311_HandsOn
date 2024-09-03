@@ -1,7 +1,7 @@
 # Sorting-Algorithms
 
 /*
-The HaandsOn-2 has implementation for :
+The HandsOn-2 has implementation for :
 1. insertion sort
 2. selection sort
 3. bubble sort
