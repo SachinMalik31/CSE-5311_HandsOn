@@ -1,0 +1,287 @@
+
+
+ function x = f(n)
+   x = 1;
+   for i = 1:n
+        for j = 1:n
+             x = x + 1;
+			 
+			 
+   Q1. Find the runtime of the algorithm mathematically.
+ --->
+     
+	 Step-by-Step Analysis 
+	  
+	Step 1: Understanding the function
+	  
+	   The function performs two nested loops, each running from 1 to 𝑛, and inside the inner loop, the variable 𝑥 is incremented by 1.
+	  
+	   Let's break it down:
+
+       i. Outer Loop: for i = 1:n runs 𝑛 times.
+      ii. Inner Loop: for j = 1:n also runs 𝑛 times for each iteration of the outer loop.
+     iii. Inside the inner loop, the expression x = x + 1 executes once for each combination of 𝑖 and 𝑗.
+	
+	
+	Step 2: Counting the Operations
+
+        The number of times the inner loop runs depends on the number of iterations of the outer loop. Each time the outer loop executes, the inner loop runs 𝑛 times.
+
+        So, the total number of operations 𝑇(𝑛) is the number of times 𝑥=𝑥+1 is executed, which can be expressed as:	
+	  
+                                   n     n
+					  T(n)=   ∑     ∑  1
+					            i=1    j=1  
+					           
+​        This means that for each 𝑖, the inner loop runs 𝑛 times. So, we can simplify the double summation:
+
+				              n
+					  T(n)=   ∑  n
+					         i=1  
+        
+		Since 𝑛 is a constant inside the summation, we can factor it out:
+
+           𝑇(𝑛)=  𝑛⋅𝑛 = 𝑛^2
+
+    
+	Step 3:  Analyzing the Complexity
+	
+        The total number of operations is 𝑛^2. Thus, the runtime of the algorithm grows quadratically with 𝑛.
+
+        In Big-O notation, the time complexity of the algorithm is:
+
+            𝑇(𝑛)= 𝑂(𝑛^2)
+			
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------			
+			
+			
+Q2.  Time this function for various n ( e.g. n = 1,2,3.... ) You should have small values of n all the way up to large values. Plot "time" vs "n" (time on y-axis and n on x-axis). Also, fit a curve to your data.
+--->
+	      
+          Below is the Java code that implements the function 𝑓(𝑛), times its execution for various values of 𝑛, and stores the results in a file.
+	
+
+           public class TimeFunction {
+
+         // Function f(n) that performs the nested loop and increments x
+           public static void f(int n) {
+           int x = 1;
+           for (int i = 1; i <= n; i++) {
+              for (int j = 1; j <= n; j++) {
+                  x = x + 1;
+                }
+            }
+          }
+
+           public static void main(String[] args) {
+           int[] n_values = {1, 2, 3, 4, 5, 10, 20, 50, 100, 200, 500, 1000};  // Test for various values of n
+          double[] times = new double[n_values.length];
+
+          // Time the function for each value of n
+          for (int i = 0; i < n_values.length; i++) {
+             int n = n_values[i];
+             long startTime = System.nanoTime();  // Start the timer
+             f(n);  // Call the function f(n)
+             long endTime = System.nanoTime();  // End the timer
+             double duration = (endTime - startTime) / 1e6;  // Convert to milliseconds
+             times[i] = duration;
+             System.out.println("n = " + n + ", Time: " + duration + " ms");
+              }
+           }
+          }
+		  
+		
+	i. The function f(n) runs two nested loops from 1 to 𝑛, incrementing a variable x.
+   ii. The main method runs f(n) for different values of 𝑛 and measures the time taken using System.nanoTime() for higher precision.
+   
+  Note :  The "time vs n" plot is mentioned in the reply message.
+   
+       Here is the plot generated using the provided data for "time vs n."
+
+       i. The blue circles represent the actual measured times.
+      ii. The red dashed line shows the quadratic polynomial fit to the data.
+
+      As expected, the plot shows an upward curve, indicating a quadratic growth pattern consistent with the  𝑂(𝑛^2)  time complexity
+   
+   
+   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   
+   
+  Q3.  Find polynomials that are upper and lower bounds on your curve from #2. From this specify a big-O, a big-Omega, and what big-theta is.
+ --->
+     
+	    To define upper and lower bounds on the growth of the function, we use Big-O and Big-Omega notations. 
+		We can then combine these bounds to get Big-Theta, which gives the asymptotically tight bound for the time complexity.
+		
+    	a.	Finding the Upper Bound (Big-O)
+   
+          The upper bound describes the worst-case scenario of the function’s growth rate.
+
+              i. The outer loop runs  𝑛 times.
+             ii. For each iteration of the outer loop, the inner loop runs  𝑛 times.
+		    iii. Inside the inner loop, the operation x = x + 1 takes constant time, say 𝑐 units of time.
+		   
+		Thus, the total time taken by the function is proportional to:
+                             
+							 𝑇(𝑛) = 𝑐 ⋅ 𝑛 ⋅ 𝑛 = 𝑐 ⋅ 𝑛^2
+
+ 
+		To express this using Big-O notation, we drop the constant 𝑐, which results in:
+
+                            𝑇(𝑛) = 𝑂(𝑛^2)
+
+		
+		This means that the time complexity of the function is bounded above by  𝑛^2 . So, any function that grows slower than or equal to  𝑛^2  serves as an upper bound.
+		
+		
+		
+		b.  Finding the Lower Bound (Big-Omega)
+		
+		  The lower bound describes the best-case scenario for the function’s growth rate. 
+		  
+		  In this case, because the function always executes both loops completely (there are no early exits or breaks), the lower bound is the same as the upper bound.
+		  
+		  So, the lower bound for the function is:
+
+											𝑇(𝑛) = Ω(𝑛^2)
+										
+          This means that any function that grows faster than or equal to  𝑛^2  serves as a lower bound.			
+
+
+
+        c.  Big-Theta  ( Tight Bound )
+
+              Since both the upper bound and lower bound are  (𝑛^2) , the function’s growth is tightly bounded by (𝑛^2) , meaning the function’s time complexity is (𝑛^2) in both the best and worst cases.
+
+              Thus, the function’s time complexity can be described as:
+                              
+							  𝑇(𝑛)= Θ(𝑛^2)
+
+		
+		
+        d.  Specifying Polynomials for Upper and Lower Bounds		
+		
+		       From the previous #2 timing data and the curve fit (as seen in the previous plot), we know that the curve follows a quadratic growth pattern. 
+		       Based on this, we can provide specific polynomials that serve as upper and lower bounds.
+			   
+		
+      		Upper Bound Polynomial (Big-O):
+                              
+							  An upper bound polynomial can be slightly larger than the curve:
+
+                                                    𝑇(𝑛) ≤ 𝑐1⋅𝑛^2
+
+                              For instance, if we choose 𝑐1=1.4, then the upper bound function might look like:
+
+                                                     𝑇(𝑛) ≤ 1.4 ⋅ 𝑛^2
+
+ 
+                              This means that for large 𝑛, the execution time will never exceed this polynomial.
+
+            
+			
+			Lower Bound Polynomial (Big-Omega):
+                               
+							  A lower bound polynomial can be slightly smaller than the curve:
+
+                                                   𝑇(𝑛) ≥ 𝑐2 ⋅ 𝑛^2
+
+ 
+                              For instance, if we choose 𝑐2= 0.9, then the lower bound function might look like:
+
+                                                   𝑇(𝑛) ≥ 0.9 ⋅ 𝑛^2
+ 
+                             This means that for large 𝑛, the execution time will never fall below this polynomial.
+							 
+							 
+							 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------		
+			
+			
+
+		If I modified the function to be:
+		x = f(n)
+             x = 1;
+			 y = 1;
+		   	for i = 1:n
+				for j = 1:n
+					x = x + 1;
+        		y = i + j;
+
+
+
+    Q4. Will this increate how long it takes the algorithm to run (e.x. you are timing the function like in #2)? 
+--->
+
+                 In the previous function, the inner loop contained the operation   x = x + 1, which takes constant time   𝑂(1).
+
+                 In the modified version, we have added an additional operation   y = i + j,   which also takes constant time   𝑂(1)  because it's just an integer addition.	
+	
+            
+		a.	Time Complexity :
+			
+			The total number of iterations still remains 𝑛^2.
+			
+			Since each iteration of the inner loop still takes constant time 𝑂(1),  the overall time complexity of the function remains:
+
+											𝑇(𝑛) = 𝑂(𝑛^2)
+
+
+        b.  Impact on Runtime :
+		
+		    Although the time complexity remains 𝑂(𝑛^2) , the actual runtime (in terms of the number of operations per iteration) will increase because now we are performing two constant-time operations instead of one. 
+
+              i. In the original function, each iteration of the inner loop took  𝑂(1) time.
+		     ii. In the modified function, each iteration of the inner loop still takes 𝑂(1), but now with a larger constant factor since there are two operations.
+		  
+		  
+		  
+		c. Conclusion : 
+		        
+				Yes, the algorithm will take slightly longer to run because there are now more operations in each iteration of the inner loop. 
+				However, this increase is due to the larger constant factor, not due to a change in the time complexity.  
+				
+				
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------			
+				
+	
+   Q5. 	Will it effect your results from #1?
+--->			
+
+            In the modified function, inside the inner loop, there are two constant-time operations:
+                                x = x + 1     and      y = i + j
+								
+			Both operations take constant time  𝑂(1). So, each iteration of the inner loop still takes 𝑂(1) time for each operation. 
+			
+			However, the total constant time for each inner loop iteration is now twice what it was before due to the additional operation.		
+
+            We can express the total runtime using summations as follows:
+
+                                                  n        n                                                     n        n
+								T(n)= 	      ∑        ∑     (O(1)+O(1))		=       2 .      ∑        ∑    O(1)         =      2 . O(n^2)
+											    i=1     j=1                                                  i=1     j=1
+​
+  
+          
+		  Although the runtime now includes a factor of 2 (due to the two constant-time operations), constant factors are ignored in asymptotic analysis. 
+		  Therefore, the simplified expression for the time complexity remains:
+                                                   
+												   𝑇(𝑛) = 𝑂(𝑛^2)
+
+
+          Conclusion :
+		         
+				i.  No, it does not affect the asymptotic runtime result. The time complexity remains   𝑂(𝑛^2)   even though the actual number of operations per iteration has increased.
+
+​               ii.   The actual runtime will increase due to the extra constant-time operation, but this increase is accounted for by a constant factor of 2, which does not change the overall asymptotic complexity.
+
+
+
+
+
+  
+ 	
+​
+ 
+ 
