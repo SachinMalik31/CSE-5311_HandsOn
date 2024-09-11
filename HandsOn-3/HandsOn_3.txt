@@ -94,14 +94,8 @@ Q2.  Time this function for various n ( e.g. n = 1,2,3.... ) You should have sma
 	i. The function f(n) runs two nested loops from 1 to 𝑛, incrementing a variable x.
    ii. The main method runs f(n) for different values of 𝑛 and measures the time taken using System.nanoTime() for higher precision.
    
-  Note :  The "time vs n" plot is mentioned in the reply message.
-   
-       Here is the plot generated using the provided data for "time vs n."
-
-       i. The blue circles represent the actual measured times.
-      ii. The red dashed line shows the quadratic polynomial fit to the data.
-
-      As expected, the plot shows an upward curve, indicating a quadratic growth pattern consistent with the  𝑂(𝑛^2)  time complexity
+  Note :  The "time vs n" plot is attached and refer " README file " for explanation
+ 
    
    
    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
