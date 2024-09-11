@@ -6,7 +6,17 @@
 
 
 
-**Merge Sort** 
+**Q2:    " Time vs n " plot**
+
+ In the plot generated using the provided data for "time vs n."
+
+       i. The blue circles represent the actual measured times.
+      ii. The red dashed line shows the quadratic polynomial fit to the data.
+
+ As expected, the plot shows an upward curve, indicating a quadratic growth pattern consistent with the  𝑂(𝑛^2)  time complexity
+
+
+**Q6 : Merge Sort** 
 
 _Explanation of Code_ : 
 
